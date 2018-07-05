@@ -1,0 +1,180 @@
+% !TEX encoding = UTF-8
+% !TEX program = pdflatex
+
+\documentclass[a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+
+\begin{document}
+
+\title{Pendulum Wave}
+\author{Progetto Hands on Physics}
+
+\maketitle
+
+\section{Funzionamento}
+
+La parte strutturale dello strumento è basata su pure e semplici leggi meccaniche e consiste in un insieme di pendoli di diversa lunghezza, appesi ad un architrave sorretto da due sostegni laterali e collegati ad un sistema di accordatura, e in un array di laser e sensori. L'obiettivo dell'apparato meccanico è quello di inviare segnali elettrici in input ad una scheda Arduino e, contemporaneamente, risultare gradevole alla vista mentre è in funzione.
+
+\subsection{Funzionamento locale Laser-Pendolo-Sensore}
+
+Per costruire materialmente ed in modo efficiente la struttura è indispensabile concentrarsi sul funzionamento locale di ogni terna Laser-Pendolo-Sensore.\\
+Il fascio laser è diretto perpendicolarmente a terra, in modo da colpire il sensore in assenza della pallina. Quando il pendolo, durante il suo moto, passa per la posizione di riposo, la massa posta in fondo ad esso intercetta il fascio laser. Il sensore (o più precisamente fotoresistore) rileva questo cambiamento nella luce che lo colpisce e manda il segnale di input alla scheda Arduino.
+
+\subsection{Preparazione dello strumento}
+
+Ogni volta che l'intero apparato viene utilizzato, sono necessarie alcune operazioni per accertarsi che tutto sia in regola, affinchè funzioni complessivamente senza errori considerevoli.\\
+Le operazioni da eseguire (in ordine) sono le seguenti:\\\\
+-Stabilizzazione della struttura\\
+-Allineamento Laser-Pendoli e Laser-Sensori\\
+-Prova generale dell'onda di pendoli\\
+-Accordatura locale dei pendoli\\
+-Taratura dei sensori ed avvio\\
+
+Di seguito sono spiegate più nel dettaglio tutte le azioni da seguire in ordine per ottenere un funzionamento eccellente.
+
+\subsubsection*{Stabilizzazione della struttura}
+
+Per rendere stabile la struttura è necessario montare come prima cosa i sostegni triangolari.\\
+Essi vanno fissati tramite un galletto all'architrave su cui sono montati pendoli e laser. In seguito vanno aperti in modo che la base poggi completamente a terra. Infine si fissa la base mobile utilizzando un altro galletto.\\
+Anche se non strettamente necessario, come si vedrà in seguito, può risultare comodo regolare l'inclinazione dell'architrave (ad esempio per metterlo in bolla). Per farlo basta allentare i galletti che lo tengono fissato ai sostegni laterali, modificare la sua inclinazione e avvitare nuovamente i galletti per fissarlo ancora.\\
+
+\textbf{\textsc{Attenzione!}} È di fondamentale importanza \emph{assicurarsi che l'architrave NON sia libero di ruotare} una volta completata la fase di stabilizzazione. Il rischio di non effettuare questa importantissima operazione è che durante il funzionamento dell'apparato esso modifichi la sua inclinazione (compromettendo le oscillazioni dei pendoli) o che peggio ancora si stacchi dai sostegni laterali e cada!\\
+
+Per eseguire le operazioni di stabilizzazione è meglio lavorare in coppia, in modo che durante il montaggio del primo sostegno una persona possa mantenere l'architrave parallelo a terra, evitando in questo modo che si danneggi o si rompa durante il processo.\\
+Lavorare in coppia porta anche il vantaggio di avere un doppio controllo su questa parte molto importante della preparazione.
+
+\subsubsection*{Allineamento Laser-Pendoli e Laser-Sensori}
+
+Questi due allineamenti, se eseguiti correttamente, assicurano anche che l'architrave sia in bolla.\\
+Per poterli attuare è necessario alimentare i diodi (nel nostro caso con una tensione di 4.5V), in modo da poter visualizzare dove puntano. Se si vuole osservare anche il fascio laser si può umidificare l'aria con del vapore in modo da vedere una linea continua invece di un solo punto su una superficie. Questa ultima operazione non è essenziale ma permette di individuare eventuali deviazioni del fascio laser a causa di un guasto del LED.\\
+
+Per allineare il laser con i pendoli è necessario che essi non oscillino, rimanendo fermi nella loro posizione di riposo. Laser e pendoli sono allineati quando tutti i fasci vengono intercettati dalle palline, colpendo nella migliore delle ipotesi il loro centro.\\
+Dopo questa operazione, dato che i pendoli fungono da filo a piombo, l'architrave dovrebbe essere in bolla.\\
+
+L'allineamento tra laser e sensori inizia incastrando la barra dei sensori tra le basi orrizzontali dei sostegni laterali della struttura. In seguito basta aggiustare la sua posizione in modo che tutti i laser colpiscano il rispettivo fotoresistore. In questa fase bisogna fare il possibile per fare in modo che ogni laser punti nel centro del fotoresistore, per evitare problemi nell'invio dell'input alla scheda Arduino.
+
+\subsubsection*{Prova generale dell'onda di pendoli}
+
+A questo punto bisogna agire sulla lunghezza dei pendoli, in modo da regolarne la frequenza.\\
+Dato che l'accordatura dei pendoli, come descritto in seguito, è un processo che può richiedere molto tempo, è necessario individuare in modo rapido quali pendoli sono da aggiustare.\\
+Per fare ciò utilizziamo un'asta di legno che ci permetta di spostare tutte le palline ad una stessa ampiezza, per poi far iniziare tutti i loro rispettivi moti osccilatori contemporaneamente. Osservando le oscillazioni complessivamente possiamo notare facilmente quali pendoli si muovono più veloci o più lenti di quanto dovrebbero.\\
+Una volta individuati i pendoli da aggiustare possiamo concentrarci su di essi ed accordarli adeguatamente.
+
+\subsubsection*{Accordatura locale dei pendoli}
+
+Ora che sappiamo quali pendoli sono da modificare pensiamo a come accordarli.\\
+
+Un capo del filo di ogni pendolo è collegato ad un meccanismo di accordatura, come descritto nella sezione \textit{Pendoli e meccanismo di accordatura}; vediamo ora come va utilizzato.\\
+Per accorciare il filo (cioè aumentare la frequenza del pendolo) è necessario girare la chiave di chitarra in senso orario guardandola dall'alto. Di conseguenza per allungare il filo (cioè diminuire la frequenza del pendolo) basta girarla in senso antiorario, sempre guardandola dall'alto.\\
+
+Per ottenere la frequenza desiderata è necessario eseguire delle prove locali sul pendolo che si vuole accordare.\\
+Utilizzando un cronometro si inizia a misurare dall'istante $t_i$, e si iniziano a contare le oscillazioni del pendolo.\\
+\textbf{\textsc{Attenzione!}} Si ricordi che un'oscillazione completa di un pendolo finisce quando esso compie per due volte lo stesso arco di circonferenza, \emph{ritornando nella posizione iniziale}.\\
+Una volta che l'$n$-esimo pendolo ha compiuto $o_n$ oscillazioni (si consulti la tabella nella sezione \textit{Formule e leggi} per determinare $o_n$) si fermi il cronometro nell'instante $t_f$.\\
+
+La frequenza del pendolo è ora tanto vicina a quella desiderata quanto il tempo indicato sul display del cronometro $\Delta t=t_f-t_i$ si avvicina a $T_{tot}$ (vedi sezione \textit{Formule e leggi}).\\
+
+\emph{Consiglio!} Per stabilire con più precisione la frequenza reale del pendolo esaminato è consigliato che più persone misurino il tempo $\Delta t$ contemporaneamente, in modo che gli errori dovuti ai tempi di reazione troppo ritardati od anticipati di ogni osservatore si compensino nella media dei tempi misurati.
+
+\subsubsection*{Taratura dei sensori ed avvio}
+
+L'ultima operazione necessaria prima dell'avvio dello strumento è la taratura dei fotoresistori.\\
+
+Per tarare i sensori opportunamente è prima necessario creare un ambiente buio ed alimentare i LED con una tensione di 4.5V. In seguito, mantenendo le masse dei pendoli spostate dai fasci laser, avviare la taratura dal computer, aspettare qualche secondo da quando il programma afferma che la taratura è stata completata, illuminare nuovamente l'ambiente ed infine rilasciare i pendoli.\\
+
+Se queste istruzioni sono state eseguite correttamente ora non rimane altro che godersi lo spettacolo.\\
+
+\section{Costruzione}
+
+Per costruire la struttura abbiamo tenuto conto di alcuni punti da rispettare affinché l'intero apparato funzioni a dovere, ovvero:\\\\
+-La distanza percorsa dal fascio laser non deve essere eccessiva\\
+-La struttura deve essere facilmente smontabile e trasportabile\\
+-La struttura deve essere il più stabile possibile\\
+-I pendoli non devono attorcigliarsi su se stessi\\
+-La lunghezza dei pendoli deve essere regolabile\\
+-Laser e sensori devono essere montati ed orientati perfettamente lungo una retta perpendicolare a terra\\
+
+Sulla base di queste richieste da soddisfare abbiamo misurato, tramite calcoli trigonometrici, le varie misure che ci servivano per realizzare una struttura quanto più efficiente possibile.\\
+Ogni parte è stata realizzata secondo le esigenze specifiche richieste. Di seguito sono riportate le varie fasi di montaggio per ogni pezzo della struttura.
+
+\subsection{Sostegni laterali}
+
+Per fare in modo che l'architrave non crolli abbiamo realizzato 2 sostegni che soddisfino i primi 3 punti sopraelencati. Sulla base della portata massima dei laser per essere recepiti dai sensori, abbiamo deciso di costruire 2 triangoli smontabili e pieghevoli, con una base abbastanza larga da impedire alla struttura di traballare.\\
+L'angolo al vertice superiore, perciò, doveva essere scelto adeguatamente in modo che gli assi obliqui esercitassero una reazione vincolare sull'architrave più grande possibile, mantenendo un'apertura che assicurasse il maggior equilibrio.
+
+\subsection{Pendoli e meccanismo di accordatura}
+
+Per soddisfare il quarto ed il quinto punto citati sopra sono stati presi alcuni accorgimenti.\\
+Per fare in modo che i fili dei pendoli non si torcano (diminuendo effettivamente la loro lunghezza) abbiamo dovuto fare in modo che i 2 punti fissi di ogni filo siano abbastanza distanziati tra di loro, mantenendo tuttavia un architrave di dimensioni non esagerate.\\
+
+Il meccanismo che permette di regolare in modo molto preciso la lunghezza del pendolo è basato sul funzionamento delle meccaniche da chitarra: dispositivi che permettono di girare attorno ad un perno un filo, senza limitazioni ed indipendentemente dalla sua lunghezza.\\
+Il risultato finale consiste nella seguente configurazione per ciascun pendolo:\\
+
+Il filo parte annodato ad un occhiello, si collega alla massa tramite un anellino, passa per il secondo occhiello (senza esservi in alcun modo fissato) per poi annodarsi alla meccanica per chitarra.
+
+\subsection{Laser e sensori}
+
+Questi 2 elementi sono quelli che hanno richiesto una maggiore precisione. Difatti, anche uno spostamento minimo del laser dalla sua posizione ideale ha un grande impatto sul funzionamento del dispositivo.\\
+
+Per consentire un allineamento il più preciso possibile si è deciso di forare l'asse dei sensori e quello dei laser uno sopra l'altro, come se fossero un unico asse. Tuttavia ciò non è bastato per fare in modo che il fascio laser colpisse perfettamente il sensore, quindi si è ricorso a della colla a presa rapida per fissarlo in modo più adeguato.\\
+Ogni diodo è stato, infine, collegato in parallelo agli altri a due strisce di rame con un lato adesivo attaccato all'architrave.
+
+\section{Formule e leggi}
+
+Per realizzare l'intera base strutturale ci siamo basati su una molteplicità di leggi fisiche e formule matematiche.\\
+Le lunghezze dei pendoli, ad esempio, sono state determinate sulla base delle frequenze che si volevano ottenere, secondo la legge:
+\[ f_n=\frac{1}{2\pi}\sqrt{\frac{g}{L_n}}\]
+da cui, esplicitando $L_n$ si ottiene:
+\begin{equation}
+	 L_n=\frac{g}{4\pi^2}\frac{1}{f^2_n}
+\end{equation}
+Fissando ora il periodo di tempo $T_{tot}$ che trascorre tra lo sfasamento ed il riaffasamento dei pendoli, sappiamo che perchè ciò accada ogni pendolo dovrà compiere un numero intero di oscillazioni $o_n$ in quel determinato lasso di tempo, in modo che una volta trascorso il periodo $T_{tot}$ tutti i pendoli ritornino alla loro posizione iniziale.\\
+La frequenza dell'$n$-esimo pendolo sarà, perciò, il rapporto tra $o_n$ e $T_{tot}$.
+Sostituendo nella (1) si ottiene:
+\begin{equation}
+	 L_n=\frac{g}{4\pi^2}\left(\frac{T_{tot}}{o_n}\right)^2
+\end{equation}
+
+Per esempio noi abbiamo fissato $T_{tot}=30$ s, ed abbiamo deciso che il pendolo con frequenza maggiore deve avere un numero di oscillazioni $o_{max}$ pari a 33 oscillazioni.\\
+Il pendolo immediatamente adiacente ad esso deve compiere nello stesso tempo una oscillazione in meno, quindi $o_{max}-1$ oscillazioni. In generale l'$n$-esimo pendolo dovrà compiere $o_{max}-n+1$ oscillazioni.\\
+Sostituendo nella (2) ricaviamo la formula estesa con cui abbiamo calcolato la distanza che ogni pallina doveva avere dall'architrave:
+\begin{equation}
+ 	L_n=\frac{g}{4\pi^2}\left(\frac{T_{tot}}{o_{max}-n+1}\right)^2
+\end{equation}
+
+Nella seguente tabella sono elencate le misure usate nel nostro dispositivo.
+\begin{center}
+	\begin{tabular}{|c|c|c|c|}
+	\hline
+	$n$-esimo pendolo	&	 $o_n$ 	& $f_n$	& $L_n$\\
+	\hline
+	\hline
+	1				& 33			& 1.1 Hz	&  0.215 m\\
+	\hline
+	2				& 32			& 1.07 Hz	&  0.218 m\\
+	\hline
+	3				& 31 			& 1.03 Hz	&  0.232 m\\
+	\hline
+	4				& 30	 		& 1.00 Hz	&  0.248 m\\
+	\hline
+	5				& 29			& 0.97 Hz	&  0.266 m\\
+	\hline
+	6				& 28	 		& 0.93 Hz	&  0.285 m\\
+	\hline
+	7				& 27	 		& 0.90 Hz	&  0.307 m\\
+	\hline
+	8				& 26	 		& 0.87 Hz	&  0.331 m\\
+	\hline
+	9				& 25	 		& 0.83 Hz	&  0.358 m\\
+	\hline
+	10				& 24			& 0.80 Hz	&  0.388 m \\
+	\hline
+	11				& 23	 		& 0.77 Hz	&  0.422 m \\
+	\hline
+	12				& 22	 		& 0.73 Hz	&  0.462 m \\
+	\hline
+	\end{tabular}
+\end{center}
+\end{document}
